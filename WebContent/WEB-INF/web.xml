@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+     version="2.4">
+     <welcome-file-list>
+       <welcome-file>TrafficMonitoring.html</welcome-file>
+ </welcome-file-list>
+     <servlet>
+         <servlet-name>BestPlaceServlet</servlet-name>
+         <servlet-class>servlet.BestPlaceServlet</servlet-class>
+ </servlet>
+      <servlet>
+         <servlet-name>BestTimeServlet</servlet-name>
+         <servlet-class>servlet.BestTimeServlet</servlet-class>
+ </servlet>
+ 
+ <servlet>
+         <servlet-name>BestDateServlet</servlet-name>
+         <servlet-class>servlet.BestDateServlet</servlet-class>
+ </servlet>
+         
+ <servlet-mapping>
+         <servlet-name>BestTimeServlet</servlet-name>
+         <url-pattern>/servlet/BestTimeServlet</url-pattern>
+ </servlet-mapping>
+  <servlet-mapping>
+         <servlet-name>BestPlaceServlet</servlet-name>
+         <url-pattern>/servlet/BestPlaceServlet</url-pattern>
+ </servlet-mapping>
+ 
+   <servlet-mapping>
+         <servlet-name>BestDateServlet</servlet-name>
+         <url-pattern>/servlet/BestDateServlet</url-pattern>
+ </servlet-mapping>
+</web-app>

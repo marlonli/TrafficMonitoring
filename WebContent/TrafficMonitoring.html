@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<link rel="stylesheet" href="css/TrafficMonitoring.css" type="text/css">
+	<!--<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+	<title>Traffic Monitoring System</title>
+	
+  	<script src="http://js.api.here.com/v3/3.0/mapsjs-core.js"
+  type="text/javascript" charset="utf-8"></script>
+	<script src="http://js.api.here.com/v3/3.0/mapsjs-service.js"
+  type="text/javascript" charset="utf-8"></script>-->
+  <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+  <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js"
+  type="text/javascript" charset="utf-8"></script>
+  <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js"
+  type="text/javascript" charset="utf-8"></script>
+  <script src="http://js.api.here.com/v3/3.0/mapsjs-mapevents.js" 
+  type="text/javascript" charset="utf-8"></script>
+  <script src="http://js.api.here.com/v3/3.0/mapsjs-ui.js"
+  type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" type="text/css" 
+    href="http://js.api.here.com/v3/3.0/mapsjs-ui.css" />
+
+<!--<script src="MapPlatform.js" type="text/javascript"></script>
+<script src="MapToolBox.js" type="text/javascript"></script>
+<script src="ShowRoute.js" type="text/javascript"></script>-->
+<script src="js/GetGeocode.js" type="text/javascript"></script>
+<script src="js/GetDate.js" type="text/javascript"></script>
+<script src="js/reverseGeocode.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="FunctionBlock">
+	<div class=鈥渕yFunction鈥� id="Function1">
+		<div class="Funcoutter">Decide a Time Schedule</div>
+			<div class="Funcinner" id="Func1in1">
+				Origin:
+				<br>
+				<input id="origin1" type="text" placeholder="Enter an origin" name="f1origin">
+				<br>
+				Destination: 
+				<br>
+				<input id="destination1" type="text" placeholder="Enter a destination" name="f1destination">				
+			</div>
+			<div class="Funcinner" id="Func1in2">
+				time:
+				<br>
+				<input id="time1" type="text" placeholder="09:00AM" name="f1time">
+				<br>
+				<br>
+				<button onclick="setgeocode()">submit</button>
+			</div>
+	</div>
+	<div class=鈥渕yFunction鈥� id="Function2">
+
+		<div class="Funcoutter">Decide a Destination</div>
+			<div class="Funcinner" id="Func2in1">
+				Zip Code 1:
+				<br><input class="InpZip" type="text" placeholder="Enter a zip code" id="f2zipcode1">
+				<br>
+				Zip Code 2:
+				<br>
+				<input class="InpZip" type="text" placeholder="Enter a zip code" id="f2zipcode2">
+			</div>
+			<div class="Funcinner" id="Func2in2">
+				 Date:&nbsp&nbsp 
+				<br>
+				<input type="date" id= "func2_date">
+				<br>
+				<br>
+				<button onclick="myfunc2()">submit</button>
+				<!--<button onclick="removep()">rmv</button>-->
+			</div>
+	</div>
+	<div class=鈥渕yFunction鈥� id="Function3">
+
+		<div class="Funcoutter">Decide a Date</div>
+			<div class="Funcinner" id="Func3in1">
+				Origin:
+				<br>
+				<input type="text" placeholder="Enter an origin" id="f3origin">
+				<br>
+				Destination:
+				<br>
+				<input type="text" placeholder="Enter a destination" id="f3destination">
+			</div>
+			<div class="Funcinner" id="Func3in2">	
+				Date:
+				<br>
+				<input type="date" id="f3date">
+				<br>
+				<br>
+				<button onclick="getDate()">submit</button>
+			</div>
+	</div>
+	</div>
+	
+	<div style="width: 950px; height: 550px" id="mapContainer"></div>
+	<div id="Display">
+		Display
+	</div>
+</div>
+<script>
+	// Initialize the platform object:
+    var platform = new H.service.Platform({
+    'app_id': 'bG5IO4BP6qTQGgPB840q',
+    'app_code': '_cJtUK_hWPT-tNXE3j0zgQ'
+    });
+    // Retrieve the target element for the map:
+    var targetElement = document.getElementById('mapContainer');
+
+    // Obtain the default map types from the platform object
+    var defaultLayers = platform.createDefaultLayers();
+
+    // Instantiate (and display) a map object:
+    var map = new H.Map(
+    document.getElementById('mapContainer'),
+    defaultLayers.normal.traffic,
+    {
+      zoom: 12,
+      center: { lng: -74.463045, lat: 40.522963 }
+    });
+    var mapEvents = new H.mapevents.MapEvents(map);
+    var ui = H.ui.UI.createDefault(map, defaultLayers);
+
+/*
+ var routingParameters = {
+  	'mode': 'fastest;car',
+  	'waypoint0': '30,30',
+ 	 'waypoint1': '31,31',
+ 	 'representation': 'display'
+	};
+
+
+	var onResult = function(result) {
+    var route,
+      routeShape,
+      startPoint,
+      endPoint,
+      strip;
+  if(result.response.route) {
+    route = result.response.route[0];
+    routeShape = route.shape;
+    strip = new H.geo.Strip();
+    routeShape.forEach(function(point) {
+      var parts = point.split(',');
+      strip.pushLatLngAlt(parts[0], parts[1]);
+    });
+    startPoint = route.waypoint[0].mappedPosition;
+    endPoint = route.waypoint[1].mappedPosition;
+    var routeLine = new H.map.Polyline(strip, {
+      style: { strokeColor: 'blue', lineWidth: 10 }
+    });
+    var startMarker = new H.map.Marker({
+      lat: startPoint.latitude,
+      lng: startPoint.longitude
+    });
+    var endMarker = new H.map.Marker({
+      lat: endPoint.latitude,
+      lng: endPoint.longitude
+    });
+
+    map.addObjects([routeLine, startMarker, endMarker]);
+    map.setViewBounds(routeLine.getBounds());
+  }
+};
+var router = platform.getRoutingService();
+router.calculateRoute(routingParameters, onResult,
+    function(error) {
+        alert(error.message);
+});*/
+
+// Add event listener:
+      map.addEventListener('tap', function(evt) {
+  // Log 'tap' and 'mouse' events:
+     console.log(evt.type, evt.currentPointer.type); 
+   });
+ var behavior = new H.mapevents.Behavior(mapEvents);
+ var mapSettings = ui.getControl('mapsettings');
+ var zoom = ui.getControl('zoom');
+ var scalebar = ui.getControl('scalebar');
+ var panorama = ui.getControl('panorama');
+
+ /*panorama.setAlignment('top-left');
+ mapSettings.setAlignment('top-left');
+ zoom.setAlignment('top-left');
+ scalebar.setAlignment('top-left');*/
+</script>
+</html>

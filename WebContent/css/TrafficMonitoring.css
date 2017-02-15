@@ -1,0 +1,133 @@
+body {
+  background-color: #FFF;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+button {
+    background-color: white;
+    color: black;
+    border: 1px solid #555555; 
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: sans-serif;
+    font-weight: 300;
+
+  transition: all ease 0.3s;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #555555;
+    color: white;
+    /*-webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;*/
+}
+button:focus{
+	outline: none;
+}
+button:active {
+  background-color: #FFFFFF;
+  color: black;
+  transition-duration: 0s;
+}
+
+input {
+	font-family: sans-serif;
+	font-size: 12px;
+    border: 2px solid #dadada;
+    border-radius: 2px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+input:focus{
+    outline: none;
+    box-shadow: 0px 0px 10px #9ecaed;
+    border-color: #5AB0DB;
+}
+
+#Function1{
+	float: left;
+	border: 1px solid;
+	border-radius: 4px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	margin-left: 8px;
+	padding-top: 2px;
+	padding-bottom: 3px;
+	/*box-shadow: 2px 2px 3px 1px #999999;*/
+    -webkit-transition-duration: 0.5s; 
+    transition-duration: 0.5s;
+}
+#Function2{
+	float: left;
+	border: 1px solid;
+	border-radius: 4px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	margin-left: 8px;
+	/*box-shadow: 2px 2px 3px 1px #999999;*/
+	padding-bottom: 4px;
+    -webkit-transition-duration: 0.5s; 
+    transition-duration: 0.5s;
+}
+#Function3{
+	float: left;
+	border: 1px solid;
+	border-radius: 4px;
+	margin-bottom: 4px;
+	margin-top: 5px;
+	margin-left: 8px;
+	padding-top: 2px;
+	padding-bottom: 3px;
+	/*box-shadow: 2px 2px 3px 1px #999999;*/
+    -webkit-transition-duration: 0.5s; 
+    transition-duration: 0.5s;
+}
+.InpZip{
+	width: 120px;
+}
+#Display{
+	float: left;
+	width: 250px;
+	height: 538px;
+	border: 1px solid;
+	border-radius: 4px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	margin-left: 5px;
+    -webkit-transition-duration: 0.7s; 
+    transition-duration: 0.7s;
+}
+.Funcoutter{
+	text-align: center;
+	font-size: 16px;
+	font-weight: 500;
+	padding-bottom: 0;
+	margin-bottom: 0;
+	padding-top: 0;
+}
+#Display:hover {
+	box-shadow: 3px 3px 10px 1px #999999;
+}
+#Function1:hover {
+	box-shadow: 3px 3px 10px 1px #999999;
+}
+#Function2:hover {
+	box-shadow: 3px 3px 10px 1px #999999;
+}
+#Function3:hover {
+	box-shadow: 3px 3px 10px 1px #999999;
+}
+.Funcinner{
+	font-weight: normal;
+	font-size: 13px;
+	float: left;
+	margin: 0 4px 4px 4px; 
+}
+#FunctionBlock{
+	margin: 2px;
+}
+#mapContainer{
+	float: left;
+	float: top;
+}
